@@ -1,0 +1,36 @@
+services:
+  modesto.presentation.webapi:
+    build:
+      context: C:\Repos\Personal\Modesto
+      dockerfile: src/Modesto.Presentation.WebAPI/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: Modesto.Presentation.WebAPI
+      target: base
+    container_name: Modesto.Presentation.WebAPI
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      NUGET_FALLBACK_PACKAGES: ''
+    image: modestopresentationwebapi:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  ""'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    ports:
+    - target: 80
+    - target: 443
+    tty: true
+    volumes:
+    - C:\Repos\Personal\Modesto\src\Modesto.Presentation.WebAPI:/app:rw
+    - C:\Users\diego\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\diego\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\diego\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Users\diego\.nuget\packages:/root/.nuget/packages:ro
+    - C:\Repos\Personal\Modesto:/src:rw
+version: '3.4'

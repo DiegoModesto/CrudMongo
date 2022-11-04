@@ -1,0 +1,16 @@
+services:
+  modesto.presentation.webapi:
+    build:
+      context: C:\Repos\Personal\Modesto
+      dockerfile: src/Modesto.Presentation.WebAPI/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: modestopresentationwebapi
+    ports:
+    - target: 80
+    - target: 443
+    volumes:
+    - C:\Users\diego\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\diego\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+version: '3.4'

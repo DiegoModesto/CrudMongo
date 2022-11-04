@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  modesto.presentation.webapi:
+    image: ${DOCKER_REGISTRY-}modestopresentationwebapi
+    build:
+      context: .
+      dockerfile: src/Modesto.Presentation.WebAPI/Dockerfile
